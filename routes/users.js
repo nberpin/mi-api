@@ -4,7 +4,7 @@ const router= express.Router();
 
 
 router.get ('/', function(req, res){
-  userServices.getUsers(req,res);
+  userServices.getAllUsers(req,res);
 
 })
 module.exports = router;

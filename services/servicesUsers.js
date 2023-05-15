@@ -1,8 +1,8 @@
 
 
-const getUsers =function(req,res){
-
-  const {limit, offset}=req.query;
+const getAllUsers =async function(req,res){
+  try {
+    const {limit, offset}=req.query;
   if (limit && offset){
     res.json({
       limit,
@@ -11,5 +11,9 @@ const getUsers =function(req,res){
   }else {
     res.send('No hay parámetros');
   }
+  } catch (error) {
+     console.log(error);
+  }
+
 }
-module.exports={getUsers}
+module.exports={getAllUsers}
