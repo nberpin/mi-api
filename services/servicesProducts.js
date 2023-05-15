@@ -1,4 +1,5 @@
 const faker= require('faker');
+const boom=require('@hapi/boom');
 
 // const getAllProducts = async function(req, res){
 // try {  const products=[];
@@ -19,7 +20,7 @@ const faker= require('faker');
 // }
 //modificación para crear un error a posta
 const getAllProducts = async function(req, res){
-  const price=allPrice(); //llamamos a una función que no existe, fuera del trycatch para gestionarlo nosotros
+  const price=allPrice(); //llamamos a una función que no existe
   try {
 
     const products=[];
@@ -56,6 +57,10 @@ const createNewProduct= async function (req, res){
 const updateProduct = async function (req,res){
  try {
    const {id}= req.params;
+   if (id!=1){
+    //throw new Error("Id no encontrado");
+    throw boom.notFound('Product not found');
+   }
    const body= req.body;
 
    res.json ({

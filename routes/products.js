@@ -1,6 +1,8 @@
 var express = require('express');
-const productServices =require ("../services/servicesProducts")
+const productServices =require ("../services/servicesProducts");
+const { validatorHandler } = require('../middleware/validator.handler');
 const router= express.Router();
+const{ schemaProductCreate, schemaProductGet, schemaProductUpdate}= require('../schema/schemaProduct');
 
 // router.get('/', async function(req, res){  //llamo a la función
 //   const products= await productServices.getAllProducts(req,res); //me quedo en espera de la respuesta.
@@ -17,7 +19,8 @@ router.get('/', async function(req, res,next){  //añado una llamada al middlewa
   }
 });
 
-router.post('/', async function(req, res){
+router.post('/', validatorHandler(schemaProductCreate, 'body'),
+ async function(req, res){
  const createProduct= await productServices.createNewProduct(req,res);
  return createProduct;
 })
@@ -32,7 +35,7 @@ router.delete('/:id', async function(req, res){
  return deletedProduct;
 })
 
-router.get('/:id', async function(req, res){
+router.get('/:id', validatorHandler(schemaProductGet, 'params') , async function(req, res){
    const getOneProduct= await productServices.getOneProduct(req,res);
    return getOneProduct;
 });
