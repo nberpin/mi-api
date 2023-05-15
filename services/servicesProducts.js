@@ -1,22 +1,43 @@
 const faker= require('faker');
 
-const getAllProducts = async function(req, res){
-try {  const products=[];
-  const {size}=req.query;
-  const limit=size ||5;
-  for (let index=0; index<limit; index++){
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(),10),
-      image: faker.image.imageUrl()
-    })
-  }
-  return products;
+// const getAllProducts = async function(req, res){
+// try {  const products=[];
+//   const {size}=req.query;
+//   const limit=size ||5;
+//   for (let index=0; index<limit; index++){
+//     products.push({
+//       name: faker.commerce.productName(),
+//       price: parseInt(faker.commerce.price(),10),
+//       image: faker.image.imageUrl()
+//     })
+//   }
+//   return products;
 
-} catch (error) {
-  console.log(error);
-}
-}
+// } catch (error) {
+//   console.log(error);
+// }
+// }
+//modificación para crear un error a posta
+const getAllProducts = async function(req, res){
+  const price=allPrice(); //llamamos a una función que no existe, fuera del trycatch para gestionarlo nosotros
+  try {
+
+    const products=[];
+    const {size}=req.query;
+    const limit=size ||5;
+    for (let index=0; index<limit; index++){
+      products.push({
+        name: faker.commerce.productName(),
+        price: parseInt(faker.commerce.price(),10),
+        image: faker.image.imageUrl()
+      })
+    }
+    return products;
+
+  } catch (error) {
+    console.log(error);
+  }
+  }
 const createNewProduct= async function (req, res){
  try {
    const body= req.body;
