@@ -20,7 +20,7 @@ const boom=require('@hapi/boom');
 // }
 //modificación para crear un error a posta
 const getAllProducts = async function(req, res){
-  const price=allPrice(); //llamamos a una función que no existe
+  //const price=allPrice(); //llamamos a una función que no existe
   try {
 
     const products=[];
